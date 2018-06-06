@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import $ from 'jquery';
 import './https';
-import './ga';
+import './gdpr';
 import '../scss/app.scss';
 import './toc';
 import './offline';

@@ -1,0 +1,67 @@
+.bottom-banner {
+  &.show {
+    display: block;
+    opacity: 1;
+    top: auto;
+    width: 100%;
+    height: auto;
+    position:fixed;
+    bottom:0;
+    z-index: 2;
+  }
+  @extend .z-depth-2;
+
+  display: none;
+  background: #ffffff;
+  clear: none;
+  padding: 0 0 18px 8px;
+  line-height: 1.231;
+  margin: 0;
+
+  > .bottom-banner-body {
+
+    > .bottom-banner-content {
+      min-height: 32px;
+      padding: 12px 0 8px 8px;
+
+      > h4 {
+        margin: 0;
+        font-size: 1.4rem;
+      }
+
+      > p {
+        margin: 0;
+        font-size: .9rem;
+      }
+    }
+
+
+    > .bottom-banner-actions {
+      display: block;
+      min-height: 32px;
+      float: right;
+
+      .btn {
+        &[data-reply=agree] {
+          @extend .green-text;
+          will-change: background-color, color;
+          transition: .5s;
+          &:hover {
+            @extend .green;
+            @extend .white-text;
+          }
+        }
+
+        &[data-reply=disagree] {
+          @extend .red-text;
+          will-change: background-color, color;
+          transition: .5s;
+          &:hover {
+            @extend .red;
+            @extend .white-text;
+          }
+        }
+      }
+    }
+  }
+}
