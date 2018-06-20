@@ -9,21 +9,33 @@
 {% block content %}
   <div class="container topic">
 
-    {% if topic.video_recordings.length > 0 %}
-      <div class="row">
+    {% if (topic.video_recordings.length > 0) or (topic.slides.length > 0) %}
+      <div class="row post-event">
         <div class="col s12">
           <ul class="tabs">
             {% for video in topic.video_recordings %}
               <li class="tab col s3"><a {% if loop.index == 1 %}class="active"{% endif %}
                 href="#video-{{ loop.index }}">Video {{ loop.index }}</a></li>
             {% endfor %}
+            {% if topic.slides.length > 0 %}
+              <li class="tab col s3"><a href="#slides">Slides</a></li>
+            {% endif %}
           </ul>
         </div>
-          {% for video in topic.video_recordings %}
-            <div id="video-{{ loop.index }}" class="col s12">
-              {{ video.html | safe }}
-            </div>
-          {% endfor %}
+        {% for video in topic.video_recordings %}
+          <div id="video-{{ loop.index }}" class="col s12">
+            {{ video.html | safe }}
+          </div>
+        {% endfor %}
+        {% if topic.slides.length > 0 %}
+        <div id="slides" class="col s12">
+          <ul>
+            {% for slides in topic.slides %}
+              <li><a href="{{ slides.url }}">{{ slides.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
       </div>
     {% endif %}
 
