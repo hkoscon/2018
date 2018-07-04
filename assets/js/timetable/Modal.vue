@@ -5,6 +5,33 @@
                 <div class="metadata">
                     <div class="main-info">
                         <div class="info">
+                            <div v-if="(event.video_recordings && event.video_recordings.length) > 0 || (event.slides && event.slides.length > 0)" class="container post-event">
+                              <div class="row">
+                                <div class="col s12">
+                                  <ul class="tabs">
+                                    <li v-if="event.video_recordings" v-for="(video, index) in event.video_recordings" :key="index" class="tab col s3">
+                                      <a :href="`#video-${index+1}`">Video {{ index + 1 }}</a>
+                                    </li>
+                                    <li v-if="event.slides && event.slides.length > 0" class="tab col s3">
+                                      <a href="#slides">Slides</a>
+                                    </li>
+                                  </ul>
+                                  <div v-for="(video, index) in event.video_recordings"
+                                    :key="index"
+                                    :id="`video-${index+1}`"
+                                    v-html="video.html"
+                                    class="col s12">
+                                  </div>
+                                  <div v-if="event.slides && event.slides.length > 0" id="slides">
+                                    <ul>
+                                      <li v-for="(slides, index) in event.slides" :key="index">
+                                        <a :href="slides.url">{{ slides.title }}</a>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                             <div class="header">
                                 <h2>{{ event.display }}</h2>
                                 <div v-if="event.topic && event.speakers && event.speakers.length > 0" class="speaker-thumbnails">
@@ -106,6 +133,7 @@
 
 <script>
   import { createNamespacedHelpers } from 'vuex';
+  import $ from 'jquery';
 
   /* globals window, URL, URLSearchParams, FB, ClipboardJS, Materialize */
   const { mapState, mapActions } = createNamespacedHelpers('modal');
@@ -162,6 +190,11 @@
         if (this.open && e.code === 'Escape') {
           this.closeModal();
         }
+      });
+    },
+    updated() {
+      this.$nextTick(() => {
+        $('ul.tabs').tabs();
       });
     },
   };

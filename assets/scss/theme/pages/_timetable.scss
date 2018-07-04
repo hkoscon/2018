@@ -323,6 +323,9 @@
 
 
 #modal {
+  .post-event {
+    width: 100%;
+  }
   &.show {
     .modal {
       z-index: 1003;
@@ -501,6 +504,35 @@
   .modal {
     animation-name: animatetop;
     animation-duration: .5s;
+
+    #slides {
+      padding-top: 3em;
+      padding-bottom: 1em;
+      min-height: 20em;
+      ul {
+        list-style-type: none;
+        li {
+          display: block;
+          a {
+            display: block;
+            width: 100%;
+            padding-left: 2.5em;
+            line-height: 1.5em;
+            background-image: url('/2018/images/slides.png');
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: 1.5em 1.5em;
+            margin: 0.5em 0;
+            color: #000;
+            transition: opacity 0.5s;
+            &:hover {
+              opacity: 0.6;
+            }
+          }
+        }
+      }
+    }
+  
   }
 
 }
